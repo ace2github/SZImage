@@ -42,7 +42,7 @@ static int sizeCount = 0;
         for (int i=0; i<50; i++) {
             [self bentchmark:data];
         }
-        NSLog(@"timecount:%d, sizecount:%d",timeCount,sizeCount);
+        NSLog(@"time cg < io count:%d, size cg < io count:%d",timeCount,sizeCount);
         
         
         timeCount = sizeCount = 0;

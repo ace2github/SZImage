@@ -1,0 +1,6 @@
+*.xcuserdatad   
+xcuserdata
+xcuserdata/
+*.xcuserstate
+UserInterfaceState.xcuserstate	
+UserInterface.xcuserstate
