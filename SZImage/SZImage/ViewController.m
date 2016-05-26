@@ -49,7 +49,7 @@ static int sizeCount = 0;
         for (int i=0; i<256; i++) {
             [self bentchmark:@"small.jpg"];
         }
-        NSLog(@"timecount:%d, sizecount:%d",timeCount,sizeCount);
+        NSLog(@"time cg < io count:%d, size cg < io count:%d",timeCount,sizeCount);
     });
 
 }
