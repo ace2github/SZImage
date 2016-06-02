@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "UIImage+Compress.h"
+#import "SZGIFImageView.h"
 
 static int timeCount = 0;
 static int sizeCount = 0;
@@ -22,6 +23,19 @@ static int sizeCount = 0;
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    SZGIFImageView *imageView0 = [[SZGIFImageView alloc] initWithFrame:CGRectMake(0, 160, 50, 50)];
+    imageView0.gifPath = [[NSBundle mainBundle] pathForResource:@"joy.gif" ofType:nil];
+    [self.view addSubview:imageView0];
+    
+    //[self testImageCompress];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)testImageCompress {
     NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"small" ofType:@"jpg"]];
     UIImage *srcImage = [UIImage imageWithData:data];
     
@@ -32,7 +46,6 @@ static int sizeCount = 0;
     UIImageView *imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 280, 200, 200)];
     imageView1.image = [srcImage compressUseCGWithSize:CGSizeMake(200, 187)];
     [self.view addSubview:imageView1];
-
     
     dispatch_async(dispatch_get_global_queue(0, DISPATCH_QUEUE_PRIORITY_DEFAULT), ^{
         NSString *path = [[NSBundle mainBundle] pathForResource:@"big.png" ofType:nil];
@@ -40,7 +53,7 @@ static int sizeCount = 0;
         
         timeCount = sizeCount = 0;
         for (int i=0; i<50; i++) {
-            [self bentchmark:data];
+            [self bentchmark:@"big.png"];
         }
         NSLog(@"time cg < io count:%d, size cg < io count:%d",timeCount,sizeCount);
         
@@ -51,14 +64,7 @@ static int sizeCount = 0;
         }
         NSLog(@"time cg < io count:%d, size cg < io count:%d",timeCount,sizeCount);
     });
-
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 - (void)bentchmark:(id)name {
     NSLog(@"\r\n ");
